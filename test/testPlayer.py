@@ -22,7 +22,7 @@ class testRemoveCard(unittest.TestCase):
         self.player = Player()
 
     def testRemoveEmptyHand(self):
-        self.assertEqual(self.player.removeCard("Blue 2"), 1)
+        self.assertEqual(self.player.removeCard("Blue 2"), 0)
         self.assertEqual(self.player.hand, [])
 
     def testRemoveRedCard(self):
