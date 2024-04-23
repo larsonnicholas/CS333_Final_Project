@@ -19,7 +19,10 @@ class testDraw(unittest.TestCase):
     def testDeckDrawOne(self):
         drawn = self.decks.drawCard()
         self.assertEqual(len(self.decks.deck), 55)
-        self.assertNotIn(drawn, self.decks.deck)
+        if drawn == "Wild":
+            self.assertEqual(self.decks.deck.count("Wild"), 3)
+        else:
+            self.assertNotIn(drawn, self.decks.deck)
 
     def testDeckDrawFour(self):
         for i in range(0,4):
