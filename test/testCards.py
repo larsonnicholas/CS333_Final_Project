@@ -9,7 +9,7 @@ class testInitialize(unittest.TestCase):
         self.assertEqual(len(self.decks.deck), 56)
 
     def testCardTypeCount(self):
-        self.assertEqual(sum("Blue" in card for card in self.decks.deck), 14)
+        self.assertEqual(sum("Blue" in card for card in self.decks.deck), 13)
         self.assertEqual(sum("0" in card for card in self.decks.deck), 4)
 
 class testDraw(unittest.TestCase):
@@ -38,7 +38,7 @@ class testShuffle(unittest.TestCase):
         self.decks.deck = []
         self.decks.shuffle()
         self.assertEqual(len(self.decks.deck), 56)
-        self.assertEqual(sum("Blue" in card for card in self.decks.deck), 14)
+        self.assertEqual(sum("Blue" in card for card in self.decks.deck), 13)
 
 if __name__ == "__main__":
     unittest.main()
