@@ -58,7 +58,28 @@ class testGetTopCard(unittest.TestCase):
 class testCheckValidPlay(unittest.TestCase):
     def setUp(self):
         self.game = Game()
-        
+        self.player1 = self.game.player1
+        self.player1.hand = ["Blue 5", "Red 9", "Wild", "Red 8", "Blue 9"]
+        self.game.playedCards = ["Blue 9"]
+
+    def testValidPlaySameColor(self):
+        self.assertEqual(self.game.checkValidPlay(0, self.player1), 1)
+
+    def testValidPlaySameNumber(self):
+        self.assertEqual(self.game.checkValidPlay(1,self.player1), 1)
+
+    def testValidPlayWildCard(self):
+        self.assertEqual(self.game.checkValidPlay(2, self.player1), 2)
+
+    def testValidPlayNotMatch(self):
+        self.assertEqual(self.game.checkValidPlay(3, self.player1), 0)
+
+    def testValidPlayPerfectMatch(self):
+        self.assertEqual(self.game.checkValidPlay(4, self.player1), 1)
+    
+class testPlayCard(unittest.TestCase):
+    def setUp(self):
+        self.game = Game()
 
 if __name__ == "__main__":
     unittest.main()
