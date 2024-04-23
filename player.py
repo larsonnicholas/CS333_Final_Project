@@ -15,6 +15,3 @@ class Player():
     def countCards(self):
         return len(self.hand)
     
-
-
-    
