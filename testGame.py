@@ -77,9 +77,69 @@ class testCheckValidPlay(unittest.TestCase):
     def testValidPlayPerfectMatch(self):
         self.assertEqual(self.game.checkValidPlay(4, self.player1), 1)
     
+#Other code tests for 
 class testPlayCard(unittest.TestCase):
     def setUp(self):
         self.game = Game()
+        self.player1 = self.game.player1
+        self.player1.hand = ["Blue 9", "Wild", "Red 8", "Yellow 5"]
+
+    def testPlayCard(self):
+        self.game.playCard(0, self.player1)
+        self.assertIn(self.game.getTopCard(), ["Blue 9"])
+        self.assertNotIn("Blue 9", self.player1.hand)
+        self.game.playCard(1, self.player1)
+        self.assertIn(self.game.getTopCard(), ["Blue 9", "Red 8"])
+        self.assertNotIn("Red 8", self.player1.hand)
+
+class testPlayWild(unittest.TestCase):
+    def setUp(self):
+        self.game = Game()
+        self.player1 = self.game.player1
+        self.player1.hand = ["Blue 9", "Wild", "Red 8", "Yellow 5"]
+
+    def testPlayWildBlue(self):
+        self.game.playWild(1, self.player1, "Blue")
+        self.assertIn(self.game.getTopCard(), ["Blue Wild"])
+        self.assertNotIn("Wild", self.player1.hand)
+
+    def testPlayWildRed(self):
+        self.game.playWild(1, self.player1, "Red")
+        self.assertIn(self.game.getTopCard(), ["Red Wild"])
+        self.assertNotIn("Wild", self.player1.hand) 
+
+    def testPlayWildGreen(self):
+        self.game.playWild(1, self.player1, "Green")
+        self.assertIn(self.game.getTopCard(), ["Green Wild"])
+        self.assertNotIn("Wild", self.player1.hand)
+
+    def testPlayWildYellow(self):
+        self.game.playWild(1, self.player1, "Yellow")
+        self.assertIn(self.game.getTopCard(), ["Yellow Wild"])
+        self.assertNotIn("Wild", self.player1.hand)
+
+class testCheckPlayerHand(unittest.TestCase):
+    def setUp(self):
+        self.game = Game()
+        self.player1 = self.game.player1
+        self.game.playedCards = ["Yellow 4"]
+
+    def testCheckPlayerHand_HasWildCard(self):
+        self.player1.hand = ["Wild"]
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 1)
+
+    def testCheckPlayerHand_HasSameColor(self):
+        self.player1.hand = ["Yellow Skip"]
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 1)
+
+    def testCheckPlayerHand_HasSameNumber(self):
+        self.player1.hand = ["Blue 4"]
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 1)
+
+    def testCheckPlayerHand_HasNoMatchingCards(self):
+        self.player1.hand = ["Red 9"]
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 0)   
+
 
 if __name__ == "__main__":
     unittest.main()
