@@ -138,8 +138,26 @@ class testCheckPlayerHand(unittest.TestCase):
 
     def testCheckPlayerHand_HasNoMatchingCards(self):
         self.player1.hand = ["Red 9"]
-        self.assertEqual(self.game.checkPlayerHand(self.player1), 0)   
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 0)
 
+    def testCheckPlayerHand_HasAbsolutelyNoCards(self):
+        self.player1.hand = []
+        self.assertEqual(self.game.checkPlayerHand(self.player1), 0)
+
+class testDrawPlayer(unittest.TestCase):
+    def setUp(self):
+        self.game = Game()
+        self.player1 = self.game.player1
+
+    def testDrawPlayer_OnebyOne(self):
+        self.game.drawPlayer(self.player1, 1)
+        self.assertEqual(len(self.player1.hand), 1)
+        self.game.drawPlayer(self.player1, 1)
+        self.assertEqual(len(self.player1.hand), 2)
+
+    def testDrawPlayer_Two(self):
+        self.game.drawPlayer(self.player1, 2)
+        self.assertEqual(len(self.player1.hand), 2)
 
 if __name__ == "__main__":
     unittest.main()
