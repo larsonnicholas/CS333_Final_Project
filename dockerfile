@@ -1,4 +1,4 @@
-FROM: ubuntu:jammy
+FROM ubuntu:jammy
 
 RUN apt-get install -y python3
 
