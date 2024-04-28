@@ -13,6 +13,9 @@ jobs:
 
       - name: Get Repo
         uses: actions/checkout@v4
+
+      - name: Pull Ubuntu:jammy image from docker
+        run: docker pull ubuntu:jammy
         
       - name: Login to Docker Hub
         if: steps.dockerBuild.outcome == 'success'
