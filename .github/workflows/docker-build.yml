@@ -11,5 +11,8 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps: 
       - name: Build docker image
-        run: echo build docker image.
+      - id: dockerBuild
+        run: docker build . --file dockerfile -t nwlarson/uno$(date +%s)
+      - name: Push Image
+        if: steps.dockerBuild.outcome == 'success'
       
