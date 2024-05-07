@@ -4,7 +4,7 @@ from time import sleep
 
 def main():
     game = Game()
-    print("Wecome to Uno! You should already know the rules. If you don't, you can look it up on google.")
+    print("Wecome to Uno! You should already know the rules. If you don't, better learn fast!")
     game.startGame()
     round = 0
     while True:
